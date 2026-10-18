@@ -1,0 +1,3128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Firebase Fleet Cloud Guard -->
+  <script 
+    src="https://purushothamanks.github.io/Firebase-Fleet-Manager/guard.js" 
+    data-site-id="department-rpsit" 
+    data-check-interval="3000">
+  </script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>RPSIT Multi-Department Academic Portal</title>
+  <meta name="description" content="RPSIT Multi-Department Role-Based Academic Management Portal. Supporting CSE, ECE, MECH, EEE, IT, AIDS, CIVIL, and CYBER SECURITY." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       DESIGN SYSTEM: WCAG 2.1 AAA Compliant 60-30-10 Color Scheme
+       ========================================================= */
+    :root {
+      /* Dark Theme (Default) */
+      --bg-base: #060b18;
+      --bg-surface: #0c152a;
+      --bg-card: #111d38;
+      --bg-card-hover: #17264a;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #3b82f6;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --primary: #3b82f6;
+      --primary-hover: #2563eb;
+      --primary-glow: rgba(59, 130, 246, 0.25);
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+      --nav-height: 72px;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    [data-theme="light"] {
+      --bg-base: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-card: #f1f5f9;
+      --bg-card-hover: #e2e8f0;
+      --border-subtle: rgba(15, 23, 42, 0.1);
+      --border-focus: #2563eb;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-dim: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --primary-glow: rgba(37, 99, 235, 0.15);
+      --accent: #059669;
+      --accent-glow: rgba(5, 150, 105, 0.15);
+      --warning: #d97706;
+      --danger: #dc2626;
+      --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 16px 48px rgba(15, 23, 42, 0.12);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: var(--font-sans);
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* =========================================================
+       NAVIGATION BAR & HEADER
+       ========================================================= */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-height);
+      background: rgba(6, 11, 24, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-subtle);
+      transition: all 0.25s ease;
+    }
+
+    [data-theme="light"] .nav-bar {
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100%;
+      gap: 1rem;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--text-main);
+      cursor: pointer;
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .brand-title {
+      font-size: 1.125rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
+    }
+
+    .brand-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Department Selector */
+    .dept-selector-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 0.25rem 0.75rem;
+    }
+
+    .dept-badge-icon {
+      font-size: 0.875rem;
+    }
+
+    .dept-select-input {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 700;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .dept-select-input option {
+      background: var(--bg-surface);
+      color: var(--text-main);
+    }
+
+    /* Desktop Navigation Links */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      list-style: none;
+    }
+
+    .nav-item-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.5rem 0.85rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: all 0.15s ease;
+      min-height: 40px;
+    }
+
+    .nav-item-btn:hover {
+      color: var(--text-main);
+      background: var(--bg-card);
+    }
+
+    .nav-item-btn.active {
+      color: var(--primary);
+      background: var(--primary-glow);
+    }
+
+    /* Header Actions */
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    /* Search Bar */
+    .header-search {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-search input {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      padding: 0.45rem 0.85rem 0.45rem 2.2rem;
+      color: var(--text-main);
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      outline: none;
+      width: 170px;
+      transition: all 0.2s ease;
+    }
+
+    .header-search input:focus {
+      width: 220px;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .header-search svg {
+      position: absolute;
+      left: 0.75rem;
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      font-family: var(--font-sans);
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      min-height: 42px;
+      user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+      color: #ffffff;
+      box-shadow: 0 4px 12px var(--primary-glow);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 16px var(--primary-glow);
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      background: var(--bg-card);
+      border-color: var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    .btn-secondary:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-main);
+      background: var(--bg-card);
+    }
+
+    .btn-sm {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8125rem;
+      min-height: 34px;
+      border-radius: var(--radius-sm);
+    }
+
+    .btn-icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: var(--radius-md);
+      display: inline-grid;
+      place-items: center;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .btn-icon:hover {
+      background: var(--bg-card);
+    }
+
+    .mobile-hamburger {
+      display: none;
+    }
+
+    /* Badges */
+    .role-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .role-admin {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .role-staff {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .role-student {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* =========================================================
+       HERO SECTION
+       ========================================================= */
+    .hero {
+      padding: 3rem 0 2rem;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.35rem 0.85rem;
+      background: var(--primary-glow);
+      color: var(--primary);
+      border-radius: var(--radius-full);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title {
+      font-size: clamp(1.85rem, 4.5vw, 3.25rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1.75rem;
+      max-width: 580px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-stats-row {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .hero-stat-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      font-family: var(--font-mono);
+    }
+
+    .hero-stat-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .demo-login-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 1rem;
+    }
+
+    .demo-login-title {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .demo-btn-group {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5rem;
+    }
+
+    /* =========================================================
+       MAIN SECTIONS & CARD GRIDS
+       ========================================================= */
+    main {
+      padding-bottom: 4rem;
+    }
+
+    .portal-section {
+      display: none;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .portal-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .section-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    /* Filter & Search Bar within sections */
+    .filter-input {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 1rem;
+      color: var(--text-main);
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      outline: none;
+      min-height: 40px;
+    }
+
+    .filter-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    /* Table Component */
+    .table-container {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      overflow-x: auto;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .portal-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.875rem;
+      min-width: 650px;
+    }
+
+    .portal-table th {
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    .portal-table td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      vertical-align: middle;
+    }
+
+    .portal-table tr:hover td {
+      background: var(--bg-card-hover);
+    }
+
+    .portal-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .skills-pill-wrap {
+      display: flex;
+      gap: 0.35rem;
+      flex-wrap: wrap;
+    }
+
+    .skill-pill {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      padding: 0.15rem 0.5rem;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* Card Grids for Courses, Faculty, Events */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .entity-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .entity-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .card-header-badge {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .course-code {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: var(--primary-glow);
+      padding: 0.2rem 0.55rem;
+      border-radius: var(--radius-sm);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--border-subtle);
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+    }
+
+    /* Faculty Card Specifics */
+    .faculty-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .faculty-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.15rem;
+      flex-shrink: 0;
+    }
+
+    /* Event Card Specifics */
+    .event-date-box {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-glow);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: var(--radius-md);
+      padding: 0.5rem 0.85rem;
+      text-align: center;
+      font-weight: 800;
+      color: var(--primary);
+      min-width: 65px;
+    }
+
+    /* Dashboard Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .metric-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.35rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .metric-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      display: grid;
+      place-items: center;
+      font-size: 1.25rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .metric-val {
+      font-size: 2rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-lbl {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Profile Card */
+    .profile-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      max-width: 680px;
+      margin: 0 auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .profile-avatar-lg {
+      width: 72px;
+      height: 72px;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      display: grid;
+      place-items: center;
+      font-size: 1.85rem;
+      color: #ffffff;
+      font-weight: 800;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3.5rem 1.5rem;
+      background: var(--bg-surface);
+      border: 1px dashed var(--border-subtle);
+      border-radius: var(--radius-lg);
+      color: var(--text-muted);
+    }
+
+    .empty-state-icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.6;
+    }
+
+    /* =========================================================
+       MODALS
+       ========================================================= */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 8, 18, 0.75);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      padding: 1.25rem;
+      animation: fadeIn 0.15s ease-out;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+    }
+
+    .field-group {
+      margin-bottom: 1.15rem;
+    }
+
+    .field-label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.45rem;
+    }
+
+    .field-control {
+      width: 100%;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 0.85rem;
+      color: var(--text-main);
+      font-size: 0.875rem;
+      font-family: var(--font-sans);
+      outline: none;
+      transition: all 0.15s ease;
+      min-height: 42px;
+    }
+
+    .field-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      pointer-events: none;
+    }
+
+    .toast-item {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 0.75rem 1.25rem;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      animation: slideInRight 0.25s ease-out;
+      pointer-events: auto;
+    }
+
+    .toast-success {
+      border-left: 4px solid var(--accent);
+    }
+
+    .toast-error {
+      border-left: 4px solid var(--danger);
+    }
+
+    .toast-info {
+      border-left: 4px solid var(--primary);
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 82%;
+      max-width: 320px;
+      height: 100%;
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-subtle);
+      z-index: 1050;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .mobile-drawer.open {
+      right: 0;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1040;
+      display: none;
+    }
+
+    .drawer-backdrop.open {
+      display: block;
+    }
+
+    /* Mobile Bottom Navigation Bar */
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: rgba(6, 11, 24, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-top: 1px solid var(--border-subtle);
+      z-index: 90;
+      padding: 0 0.5rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    [data-theme="light"] .mobile-bottom-nav {
+      background: rgba(255, 255, 255, 0.95);
+    }
+
+    .bottom-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: var(--radius-sm);
+      min-width: 54px;
+    }
+
+    .bottom-nav-item.active {
+      color: var(--primary);
+    }
+
+    .bottom-nav-item span.icon {
+      font-size: 1.15rem;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 960px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-menu {
+        display: none;
+      }
+      .mobile-hamburger {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --nav-height: 64px;
+      }
+      .brand-title {
+        font-size: 1rem;
+      }
+      .brand-subtitle {
+        display: none;
+      }
+      .header-search {
+        display: none;
+      }
+      .hero-title {
+        font-size: 1.85rem;
+      }
+      .demo-btn-group {
+        grid-template-columns: 1fr;
+      }
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      body {
+        padding-bottom: 74px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+  <!-- TOP NAVBAR -->
+  <header class="nav-bar">
+    <div class="container nav-container">
+      <!-- Brand & Dept Picker -->
+      <div style="display:flex;align-items:center;gap:0.75rem">
+        <a class="brand-group" onclick="navTo('home')">
+          <div class="brand-logo">RPS</div>
+          <div>
+            <div class="brand-title">Department Portal</div>
+            <div class="brand-subtitle">RPS Institute of Technology</div>
+          </div>
+        </a>
+
+        <!-- Department Dropdown in Header -->
+        <div class="dept-selector-wrap" title="Current Academic Department">
+          <span class="dept-badge-icon">🏛️</span>
+          <select id="headerDepartment" class="dept-select-input" onchange="onHeaderDeptChange()" aria-label="Department Selector">
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="MECH">MECH</option>
+            <option value="EEE">EEE</option>
+            <option value="B.TECH-IT">B.TECH-IT</option>
+            <option value="AIDS">AIDS</option>
+            <option value="CIVIL">CIVIL</option>
+            <option value="CYBER SECURITY">CYBER SECURITY</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Desktop Nav Menu -->
+      <nav class="nav-menu" id="desktopNavMenu">
+        <button class="nav-item-btn active" id="nav-btn-home" onclick="navTo('home')">🏠 Home</button>
+        <button class="nav-item-btn" id="nav-btn-students" onclick="navTo('students')">👥 Students</button>
+        <button class="nav-item-btn" id="nav-btn-courses" onclick="navTo('courses')">📚 Courses</button>
+        <button class="nav-item-btn" id="nav-btn-faculty" onclick="navTo('faculty')">👨‍🏫 Faculty</button>
+        <button class="nav-item-btn" id="nav-btn-events" onclick="navTo('events')">📅 Events</button>
+        <button class="nav-item-btn" id="nav-btn-dashboard" onclick="navTo('dashboard')">📊 Dashboard</button>
+        <button class="nav-item-btn" id="nav-btn-profile" onclick="navTo('profile')" style="display:none">🎓 Profile</button>
+      </nav>
+
+      <!-- Nav Actions (Auth, Search, Theme) -->
+      <div class="nav-actions">
+        <!-- Live Global Search -->
+        <div class="header-search">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          <input type="text" id="globalSearchInput" placeholder="Quick search..." oninput="onGlobalSearch(this.value)" aria-label="Global search">
+        </div>
+
+        <!-- User Role Badge & Auth Buttons -->
+        <div id="authContainer" style="display:flex;align-items:center;gap:0.5rem">
+          <div id="userProfileTag" style="display:none;align-items:center;gap:0.4rem">
+            <span id="userRoleBadge" class="role-badge role-admin">ADMIN</span>
+            <span id="userDisplayName" style="font-size:0.8125rem;font-weight:700;max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></span>
+          </div>
+
+          <button class="btn btn-ghost btn-sm" id="btnLogin" onclick="openLoginModal()">Login</button>
+          <button class="btn btn-primary btn-sm" id="btnRegister" onclick="openRegisterModal()">Register</button>
+          <button class="btn btn-ghost btn-sm" id="btnLogout" onclick="performLogout()" style="display:none">Logout</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="btn-icon" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">🌙</button>
+
+        <!-- Mobile Drawer Hamburger -->
+        <button class="btn-icon mobile-hamburger" onclick="toggleMobileDrawer()" aria-label="Open Navigation Drawer">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE DRAWER BACKDROP & DRAWER -->
+  <div class="drawer-backdrop" id="drawerBackdrop" onclick="closeMobileDrawer()"></div>
+  <aside class="mobile-drawer" id="mobileDrawer">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+      <div class="brand-group">
+        <div class="brand-logo" style="width:36px;height:36px;font-size:1rem">RPS</div>
+        <div class="brand-title" style="font-size:1rem">Portal Menu</div>
+      </div>
+      <button class="btn-icon" onclick="closeMobileDrawer()">✕</button>
+    </div>
+
+    <!-- Mobile User Profile Info -->
+    <div id="drawerUserInfo" style="background:var(--bg-card);padding:0.85rem;border-radius:var(--radius-md);margin-bottom:1rem;display:none">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.35rem">
+        <span id="drawerUserRole" class="role-badge role-student">STUDENT</span>
+        <button class="btn btn-ghost btn-sm" onclick="openChangePasswordModal()" style="font-size:0.75rem;padding:0.2rem 0.5rem">Key 🔑</button>
+      </div>
+      <div id="drawerUserName" style="font-weight:700;font-size:0.95rem"></div>
+      <div id="drawerUserEmail" style="font-size:0.75rem;color:var(--text-muted)"></div>
+    </div>
+
+    <!-- Navigation links -->
+    <div style="display:flex;flex-direction:column;gap:0.35rem;flex-grow:1">
+      <button class="nav-item-btn" onclick="navTo('home'); closeMobileDrawer()">🏠 Home</button>
+      <button class="nav-item-btn" onclick="navTo('students'); closeMobileDrawer()">👥 Students Directory</button>
+      <button class="nav-item-btn" onclick="navTo('courses'); closeMobileDrawer()">📚 Course Curriculum</button>
+      <button class="nav-item-btn" onclick="navTo('faculty'); closeMobileDrawer()">👨‍🏫 Faculty Directory</button>
+      <button class="nav-item-btn" onclick="navTo('events'); closeMobileDrawer()">📅 Department Events</button>
+      <button class="nav-item-btn" onclick="navTo('dashboard'); closeMobileDrawer()">📊 Analytics Dashboard</button>
+      <button class="nav-item-btn" id="drawerProfileBtn" onclick="navTo('profile'); closeMobileDrawer()" style="display:none">🎓 My Student Profile</button>
+    </div>
+
+    <!-- Quick Department Switch in Drawer -->
+    <div style="margin-top:auto;padding-top:1rem;border-top:1px solid var(--border-subtle)">
+      <label class="field-label">Switch Department</label>
+      <select id="drawerDeptSelect" class="field-control" onchange="switchDepartment(this.value); closeMobileDrawer()">
+        <option value="CSE">CSE - Computer Science</option>
+        <option value="ECE">ECE - Electronics & Comm</option>
+        <option value="MECH">MECH - Mechanical Engg</option>
+        <option value="EEE">EEE - Electrical Engg</option>
+        <option value="B.TECH-IT">B.TECH - Information Tech</option>
+        <option value="AIDS">AIDS - AI & Data Science</option>
+        <option value="CIVIL">CIVIL - Civil Engineering</option>
+        <option value="CYBER SECURITY">CYBER SECURITY</option>
+      </select>
+    </div>
+  </aside>
+
+  <!-- HERO SECTION / HOME -->
+  <section class="hero container portal-section active" id="sec-home">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-eyebrow">
+          <span>⚡ RPS Institute of Technology</span>
+          <span>•</span>
+          <span id="heroDeptBadge">Department of CSE</span>
+        </div>
+        <h1 class="hero-title">
+          Unified Academic Excellence for <span class="highlight" id="heroDeptHighlight">Computer Science</span>
+        </h1>
+        <p class="hero-desc">
+          Empowering engineering faculty, students, and administration with real-time course curriculums, event planning, and student tracking across 8 specialized disciplines.
+        </p>
+
+        <div class="hero-cta-group">
+          <button class="btn btn-primary" onclick="navTo('students')">Explore Students Directory</button>
+          <button class="btn btn-secondary" onclick="navTo('courses')">View Curriculum</button>
+          <button class="btn btn-ghost" onclick="navTo('dashboard')">Live Analytics</button>
+        </div>
+      </div>
+
+      <!-- Hero Interactive Card & Instant Demo Login -->
+      <div class="hero-card">
+        <div class="hero-card-inner">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.25rem">
+            <div>
+              <div style="font-weight:800;font-size:1.15rem" id="cardDeptName">CSE Department</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">Academic Year 2026–2027</div>
+            </div>
+            <span class="role-badge role-admin">ACTIVE</span>
+          </div>
+
+          <div class="hero-stats-row">
+            <div class="hero-stat-box">
+              <div class="hero-stat-val" id="kpiHeroStudents">0</div>
+              <div class="hero-stat-lbl">Students</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val" id="kpiHeroCourses">0</div>
+              <div class="hero-stat-lbl">Courses</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val" id="kpiHeroFaculty">0</div>
+              <div class="hero-stat-lbl">Faculty</div>
+            </div>
+            <div class="hero-stat-box">
+              <div class="hero-stat-val" id="kpiHeroEvents">0</div>
+              <div class="hero-stat-lbl">Events</div>
+            </div>
+          </div>
+
+          <!-- Instant Demo Role Selector -->
+          <div class="demo-login-box">
+            <div class="demo-login-title">
+              <span>⚡ One-Click Demo Role Login</span>
+              <span style="font-size:0.7rem;color:var(--primary)">No password required</span>
+            </div>
+            <div class="demo-btn-group">
+              <button class="btn btn-secondary btn-sm" onclick="demoLogin('admin')" title="Login as Department Administrator">🛡️ Admin</button>
+              <button class="btn btn-secondary btn-sm" onclick="demoLogin('staff')" title="Login as Senior Faculty / Staff">👨‍🏫 Staff</button>
+              <button class="btn btn-secondary btn-sm" onclick="demoLogin('student')" title="Login as Enrolled Student">🎓 Student</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN APPLICATION SECTIONS -->
+  <main class="container">
+
+    <!-- STUDENTS SECTION -->
+    <section class="portal-section" id="sec-students">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">👥 Student Directory — <span class="currentDeptTitle">CSE</span></h2>
+          <p style="font-size:0.875rem;color:var(--text-muted)">Browse, filter, and manage registered engineering students.</p>
+        </div>
+        <div class="section-actions">
+          <input type="text" id="studentSearchFilter" class="filter-input" placeholder="Filter by name, roll, skill..." oninput="renderStudentsTable()">
+          <button class="btn btn-primary btn-sm" id="btnAddStudentBtn" onclick="openAddStudentModal()">+ Add Student</button>
+          <button class="btn btn-secondary btn-sm" onclick="exportStudentsData()">📥 Export JSON</button>
+          <button class="btn btn-ghost btn-sm" onclick="triggerImportStudents()">📤 Import JSON</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table class="portal-table" id="studentsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Full Name</th>
+              <th>Roll Number</th>
+              <th>Academic Year</th>
+              <th>Email Address</th>
+              <th>Technical Skills</th>
+              <th>Role</th>
+              <th style="text-align:right">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="studentsTableBody">
+            <!-- Populated via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+      <div id="studentsEmptyState" class="empty-state" style="display:none">
+        <div class="empty-state-icon">👥</div>
+        <h3>No students found</h3>
+        <p>Try adjusting your search filter or click '+ Add Student' to register new candidates.</p>
+      </div>
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section class="portal-section" id="sec-courses">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">📚 Course Curriculum — <span class="currentDeptTitle">CSE</span></h2>
+          <p style="font-size:0.875rem;color:var(--text-muted)">Accredited departmental syllabus and semester modules.</p>
+        </div>
+        <div class="section-actions">
+          <select id="courseSemesterFilter" class="filter-input" onchange="renderCoursesGrid()">
+            <option value="ALL">All Semesters</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+          <button class="btn btn-primary btn-sm" id="btnAddCourseBtn" onclick="openAddCourseModal()">+ Add Course</button>
+        </div>
+      </div>
+
+      <div class="card-grid" id="coursesGridContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- FACULTY SECTION -->
+    <section class="portal-section" id="sec-faculty">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">👨‍🏫 Department Faculty — <span class="currentDeptTitle">CSE</span></h2>
+          <p style="font-size:0.875rem;color:var(--text-muted)">Distinguished professors, associate faculty, and research mentors.</p>
+        </div>
+        <div class="section-actions">
+          <button class="btn btn-primary btn-sm" id="btnAddFacultyBtn" onclick="openAddFacultyModal()">+ Add Faculty</button>
+        </div>
+      </div>
+
+      <div class="card-grid" id="facultyGridContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- EVENTS SECTION -->
+    <section class="portal-section" id="sec-events">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">📅 Academic & Technical Events — <span class="currentDeptTitle">CSE</span></h2>
+          <p style="font-size:0.875rem;color:var(--text-muted)">Conferences, hackathons, guest lectures, and symposiums.</p>
+        </div>
+        <div class="section-actions">
+          <button class="btn btn-primary btn-sm" id="btnAddEventBtn" onclick="openAddEventModal()">+ Add Event</button>
+        </div>
+      </div>
+
+      <div class="card-grid" id="eventsGridContainer">
+        <!-- Rendered via JS -->
+      </div>
+    </section>
+
+    <!-- ANALYTICS DASHBOARD SECTION -->
+    <section class="portal-section" id="sec-dashboard">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">📊 Analytics Dashboard — <span class="currentDeptTitle">CSE</span></h2>
+          <p style="font-size:0.875rem;color:var(--text-muted)">Department performance metrics, enrollments, and activity logs.</p>
+        </div>
+      </div>
+
+      <!-- KPI Metrics Cards -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:rgba(59,130,246,0.15);color:var(--primary)">👥</div>
+          <div class="metric-val" id="dashTotalStudents">0</div>
+          <div class="metric-lbl">Total Enrolled Students</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:rgba(16,185,129,0.15);color:var(--accent)">📚</div>
+          <div class="metric-val" id="dashTotalCourses">0</div>
+          <div class="metric-lbl">Accredited Courses</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:rgba(245,158,11,0.15);color:var(--warning)">👨‍🏫</div>
+          <div class="metric-val" id="dashTotalFaculty">0</div>
+          <div class="metric-lbl">Faculty Staff Members</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-icon-wrap" style="background:rgba(168,85,247,0.15);color:#a855f7">📅</div>
+          <div class="metric-val" id="dashTotalEvents">0</div>
+          <div class="metric-lbl">Scheduled Events & Seminars</div>
+        </div>
+      </div>
+
+      <!-- Activity & Distribution -->
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(320px, 1fr));gap:1.5rem">
+        <div class="entity-card">
+          <h3 style="font-size:1.15rem;margin-bottom:1rem">📌 Recent Department Activity</h3>
+          <div id="recentActivityList" style="display:flex;flex-direction:column;gap:0.75rem;font-size:0.875rem">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+        <div class="entity-card">
+          <h3 style="font-size:1.15rem;margin-bottom:1rem">🎓 Year-wise Student Distribution</h3>
+          <div id="yearWiseDistribution" style="display:flex;flex-direction:column;gap:0.65rem;font-size:0.875rem">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STUDENT PROFILE SECTION -->
+    <section class="portal-section" id="sec-profile">
+      <div class="profile-card">
+        <div class="profile-header">
+          <div class="profile-avatar-lg" id="profileAvatarLetter">S</div>
+          <div>
+            <span class="role-badge role-student" id="profileRoleTag">STUDENT</span>
+            <h2 style="font-size:1.5rem;font-weight:800;margin-top:0.25rem" id="profileName">Student Name</h2>
+            <div style="font-size:0.875rem;color:var(--text-muted)" id="profileDeptSub">CSE Department</div>
+          </div>
+        </div>
+
+        <div class="profile-grid">
+          <div>
+            <div class="field-label">Roll Number</div>
+            <div style="font-weight:700;font-family:var(--font-mono)" id="profileRoll">—</div>
+          </div>
+          <div>
+            <div class="field-label">Academic Year</div>
+            <div style="font-weight:700" id="profileYear">—</div>
+          </div>
+          <div>
+            <div class="field-label">Official Email</div>
+            <div style="font-weight:700" id="profileEmail">—</div>
+          </div>
+          <div>
+            <div class="field-label">Technical Competencies</div>
+            <div style="font-weight:700" id="profileSkills">—</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:0.75rem;justify-content:flex-end">
+          <button class="btn btn-secondary btn-sm" onclick="openChangePasswordModal()">Change Password</button>
+          <button class="btn btn-primary btn-sm" onclick="editCurrentProfile()">Edit Profile</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MOBILE BOTTOM NAVIGATION -->
+  <nav class="mobile-bottom-nav">
+    <button class="bottom-nav-item active" id="bnav-home" onclick="navTo('home')">
+      <span class="icon">🏠</span>
+      <span>Home</span>
+    </button>
+    <button class="bottom-nav-item" id="bnav-students" onclick="navTo('students')">
+      <span class="icon">👥</span>
+      <span>Students</span>
+    </button>
+    <button class="bottom-nav-item" id="bnav-courses" onclick="navTo('courses')">
+      <span class="icon">📚</span>
+      <span>Courses</span>
+    </button>
+    <button class="bottom-nav-item" id="bnav-events" onclick="navTo('events')">
+      <span class="icon">📅</span>
+      <span>Events</span>
+    </button>
+    <button class="bottom-nav-item" id="bnav-dashboard" onclick="navTo('dashboard')">
+      <span class="icon">📊</span>
+      <span>Stats</span>
+    </button>
+  </nav>
+
+  <!-- =========================================================
+       MODALS (LOGIN, REGISTER, STUDENT, COURSE, FACULTY, EVENT, PWD)
+       ========================================================= -->
+
+  <!-- LOGIN MODAL -->
+  <div class="modal-overlay" id="modalLogin">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title">🔐 Portal Authentication</h3>
+        <button class="btn-icon" onclick="closeModal('modalLogin')">✕</button>
+      </div>
+
+      <form onsubmit="handleFormLogin(event)">
+        <div class="field-group">
+          <label class="field-label">Select Account Role</label>
+          <select id="loginTypeSelect" class="field-control" onchange="onLoginRoleChange()" required>
+            <option value="admin">Administrator (Full Access)</option>
+            <option value="staff">Faculty / Staff Member</option>
+            <option value="student">Enrolled Student</option>
+          </select>
+        </div>
+
+        <!-- Admin credentials -->
+        <div id="loginFieldAdmin">
+          <div class="field-group">
+            <label class="field-label">Username</label>
+            <input type="text" id="adminUsernameInput" class="field-control" placeholder="admin" value="admin">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Password</label>
+            <input type="password" id="adminPasswordInput" class="field-control" placeholder="••••••••" value="admin123">
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem">Default credentials: admin / admin123</p>
+        </div>
+
+        <!-- Staff credentials -->
+        <div id="loginFieldStaff" style="display:none">
+          <div class="field-group">
+            <label class="field-label">Staff Identification ID</label>
+            <input type="text" id="staffIdInput" class="field-control" placeholder="STAFF001">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Password</label>
+            <input type="password" id="staffPasswordInput" class="field-control" placeholder="••••••••">
+          </div>
+          <p style="font-size:0.75rem;color:var(--text-muted);margin-bottom:1rem">Default staff: STAFF001 / staff123</p>
+        </div>
+
+        <!-- Student credentials -->
+        <div id="loginFieldStudent" style="display:none">
+          <div class="field-group">
+            <label class="field-label">Registered Student Email</label>
+            <input type="email" id="studentEmailInput" class="field-control" placeholder="student@rpsit.edu">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Roll Number</label>
+            <input type="text" id="studentRollInput" class="field-control" placeholder="21CS101">
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalLogin')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Sign In</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- REGISTER MODAL -->
+  <div class="modal-overlay" id="modalRegister">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title">📝 User Account Registration</h3>
+        <button class="btn-icon" onclick="closeModal('modalRegister')">✕</button>
+      </div>
+
+      <form onsubmit="handleFormRegister(event)">
+        <div class="field-group">
+          <label class="field-label">Role Type</label>
+          <select id="regRoleSelect" class="field-control" onchange="onRegisterRoleChange()" required>
+            <option value="student">Student</option>
+            <option value="staff">Staff / Faculty</option>
+            <option value="admin">Administrator</option>
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Full Name</label>
+          <input type="text" id="regFullName" class="field-control" placeholder="e.g. John Doe" required>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Email Address</label>
+          <input type="email" id="regEmail" class="field-control" placeholder="e.g. john@rpsit.edu" required>
+        </div>
+
+        <!-- Student extra fields -->
+        <div id="regStudentFields">
+          <div class="field-group">
+            <label class="field-label">Roll Number</label>
+            <input type="text" id="regRoll" class="field-control" placeholder="e.g. 23CS045">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Academic Year</label>
+            <select id="regYear" class="field-control">
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Technical Skills (comma separated)</label>
+            <input type="text" id="regSkills" class="field-control" placeholder="Python, React, AWS">
+          </div>
+        </div>
+
+        <!-- Staff extra fields -->
+        <div id="regStaffFields" style="display:none">
+          <div class="field-group">
+            <label class="field-label">Staff ID</label>
+            <input type="text" id="regStaffId" class="field-control" placeholder="e.g. STAFF002">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Set Password</label>
+            <input type="password" id="regStaffPass" class="field-control" placeholder="••••••••">
+          </div>
+        </div>
+
+        <!-- Admin extra fields -->
+        <div id="regAdminFields" style="display:none">
+          <div class="field-group">
+            <label class="field-label">Admin Username</label>
+            <input type="text" id="regAdminUser" class="field-control" placeholder="e.g. dept_admin">
+          </div>
+          <div class="field-group">
+            <label class="field-label">Set Password</label>
+            <input type="password" id="regAdminPass" class="field-control" placeholder="••••••••">
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalRegister')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Account</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT STUDENT MODAL -->
+  <div class="modal-overlay" id="modalStudent">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title" id="studentModalTitle">Add Student Record</h3>
+        <button class="btn-icon" onclick="closeModal('modalStudent')">✕</button>
+      </div>
+
+      <form onsubmit="handleSaveStudent(event)">
+        <input type="hidden" id="studentEditId">
+        <div class="field-group">
+          <label class="field-label">Full Name</label>
+          <input type="text" id="studentFormName" class="field-control" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Roll Number</label>
+          <input type="text" id="studentFormRoll" class="field-control" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email Address</label>
+          <input type="email" id="studentFormEmail" class="field-control" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Academic Year</label>
+          <select id="studentFormYear" class="field-control">
+            <option value="1st Year">1st Year</option>
+            <option value="2nd Year">2nd Year</option>
+            <option value="3rd Year">3rd Year</option>
+            <option value="4th Year">4th Year</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Skills / Specializations</label>
+          <input type="text" id="studentFormSkills" class="field-control" placeholder="e.g. Java, Machine Learning, Docker">
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalStudent')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Student</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT COURSE MODAL -->
+  <div class="modal-overlay" id="modalCourse">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title" id="courseModalTitle">Add Course Module</h3>
+        <button class="btn-icon" onclick="closeModal('modalCourse')">✕</button>
+      </div>
+
+      <form onsubmit="handleSaveCourse(event)">
+        <input type="hidden" id="courseEditId">
+        <div class="field-group">
+          <label class="field-label">Course Code</label>
+          <input type="text" id="courseFormCode" class="field-control" placeholder="e.g. CS601" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Course Title</label>
+          <input type="text" id="courseFormTitle" class="field-control" placeholder="e.g. Distributed Operating Systems" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="field-group">
+            <label class="field-label">Semester</label>
+            <select id="courseFormSem" class="field-control">
+              <option value="1">Semester 1</option>
+              <option value="2">Semester 2</option>
+              <option value="3">Semester 3</option>
+              <option value="4">Semester 4</option>
+              <option value="5">Semester 5</option>
+              <option value="6">Semester 6</option>
+              <option value="7">Semester 7</option>
+              <option value="8">Semester 8</option>
+            </select>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Credits</label>
+            <input type="number" id="courseFormCredits" class="field-control" min="1" max="6" value="3" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Syllabus & Course Objectives</label>
+          <textarea id="courseFormSyllabus" class="field-control" rows="4" placeholder="Course overview and modules..."></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalCourse')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Course</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT FACULTY MODAL -->
+  <div class="modal-overlay" id="modalFaculty">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title" id="facultyModalTitle">Add Faculty Member</h3>
+        <button class="btn-icon" onclick="closeModal('modalFaculty')">✕</button>
+      </div>
+
+      <form onsubmit="handleSaveFaculty(event)">
+        <input type="hidden" id="facultyEditId">
+        <div class="field-group">
+          <label class="field-label">Full Name & Salutation</label>
+          <input type="text" id="facFormName" class="field-control" placeholder="e.g. Dr. A. Venkatesh Ph.D." required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Designation / Role</label>
+          <input type="text" id="facFormDesig" class="field-control" placeholder="e.g. Professor & Head of Department" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Email Address</label>
+          <input type="email" id="facFormEmail" class="field-control" placeholder="e.g. venkatesh@rpsit.edu" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Research Specialization</label>
+          <input type="text" id="facFormResearch" class="field-control" placeholder="e.g. High Performance Cloud Computing">
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalFaculty')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Faculty</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ADD / EDIT EVENT MODAL -->
+  <div class="modal-overlay" id="modalEvent">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title" id="eventModalTitle">Schedule Department Event</h3>
+        <button class="btn-icon" onclick="closeModal('modalEvent')">✕</button>
+      </div>
+
+      <form onsubmit="handleSaveEvent(event)">
+        <input type="hidden" id="eventEditId">
+        <div class="field-group">
+          <label class="field-label">Event Title</label>
+          <input type="text" id="eventFormTitle" class="field-control" placeholder="e.g. National Hackathon 2026" required>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+          <div class="field-group">
+            <label class="field-label">Date</label>
+            <input type="date" id="eventFormDate" class="field-control" required>
+          </div>
+          <div class="field-group">
+            <label class="field-label">Venue / Room</label>
+            <input type="text" id="eventFormLoc" class="field-control" placeholder="e.g. Seminar Hall A" required>
+          </div>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Description & Schedule</label>
+          <textarea id="eventFormDesc" class="field-control" rows="3" placeholder="Keynote details, schedule, registration link..."></textarea>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalEvent')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Event</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- CHANGE PASSWORD MODAL -->
+  <div class="modal-overlay" id="modalPassword">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 class="modal-title">🔑 Change Account Password</h3>
+        <button class="btn-icon" onclick="closeModal('modalPassword')">✕</button>
+      </div>
+
+      <form onsubmit="handleSavePassword(event)">
+        <div class="field-group">
+          <label class="field-label">Current Password</label>
+          <input type="password" id="pwdCurrent" class="field-control" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">New Password</label>
+          <input type="password" id="pwdNew" class="field-control" required>
+        </div>
+        <div class="field-group">
+          <label class="field-label">Confirm New Password</label>
+          <input type="password" id="pwdConfirm" class="field-control" required>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:0.75rem;margin-top:1.5rem">
+          <button type="button" class="btn btn-ghost" onclick="closeModal('modalPassword')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Update Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Hidden File Input for JSON Import -->
+  <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleFileImport(event)">
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- =========================================================
+       APPLICATION CORE SCRIPT (Zero Unhandled Errors & Defensive)
+       ========================================================= -->
+  <script>
+    /* Global Department Catalogs & Pre-Seeded Academic Data */
+    const DEPARTMENTS = Object.freeze([
+      'CSE', 'ECE', 'MECH', 'EEE', 'B.TECH-IT', 'AIDS', 'CIVIL', 'CYBER SECURITY'
+    ]);
+
+    const DEPT_NAMES = Object.freeze({
+      'CSE': 'Computer Science & Engineering',
+      'ECE': 'Electronics & Communication Engineering',
+      'MECH': 'Mechanical Engineering',
+      'EEE': 'Electrical & Electronics Engineering',
+      'B.TECH-IT': 'Information Technology',
+      'AIDS': 'Artificial Intelligence & Data Science',
+      'CIVIL': 'Civil Engineering',
+      'CYBER SECURITY': 'Cyber Security & Forensic Tech'
+    });
+
+    /* Default Department Pre-Seeded Data Packages */
+    const SEED_DATA = {
+      'CSE': {
+        courses: [
+          { id: 'c_cse_1', code: 'CS101', title: 'Data Structures & Algorithms', credits: 4, sem: '3', syllabus: 'Linear & Non-linear data structures, Trees, Graph Algorithms, and Dynamic Programming complexity analysis.' },
+          { id: 'c_cse_2', code: 'CS202', title: 'Database Management Systems', credits: 4, sem: '4', syllabus: 'Relational algebra, SQL, normalization, concurrency control, transaction isolation, and ACID guarantees.' },
+          { id: 'c_cse_3', code: 'CS303', title: 'Operating Systems & Concurrency', credits: 3, sem: '5', syllabus: 'Kernel architecture, CPU scheduling, thread synchronization, semaphores, paging, and virtual memory.' },
+          { id: 'c_cse_4', code: 'CS404', title: 'Computer Networks & Protocols', credits: 4, sem: '6', syllabus: 'OSI 7-layer model, TCP/IP socket programming, flow control, BGP routing, and network security.' }
+        ],
+        faculty: [
+          { id: 'f_cse_1', name: 'Dr. R. Ramakrishnan Ph.D.', desig: 'Professor & Head of Department', email: 'ramakrishnan.cse@rpsit.edu', research: 'Distributed Computing & Edge Intelligence' },
+          { id: 'f_cse_2', name: 'Dr. Priya Senthil Ph.D.', desig: 'Associate Professor', email: 'priya.cse@rpsit.edu', research: 'Deep Neural Architectures & NLP' },
+          { id: 'f_cse_3', name: 'Prof. K. Anand M.Tech.', desig: 'Assistant Professor', email: 'anand.cse@rpsit.edu', research: 'Full-Stack Web Architectures & DevOps' }
+        ],
+        events: [
+          { id: 'e_cse_1', title: 'National Hackathon: HackInnovate 2026', date: '2026-11-15', location: 'Innovation Auditorium', description: '24-hour continuous prototype sprint tackling AI, sustainability, and fintech challenges.' },
+          { id: 'e_cse_2', title: 'Guest Lecture: Scalable Microservices with Kubernetes', date: '2026-11-28', location: 'Seminar Hall 1', description: 'Industry technical talk by Principal Cloud Architect on high-availability container clusters.' }
+        ],
+        students: [
+          { id: 's_cse_1', name: 'Karthik Raja', roll: '22CS101', email: 'karthik.22cs@rpsit.edu', year: '3rd Year', skills: 'Python, TypeScript, React, Docker', role: 'student' },
+          { id: 's_cse_2', name: 'Ananya Sharma', roll: '22CS102', email: 'ananya.22cs@rpsit.edu', year: '3rd Year', skills: 'C++, Go, Kubernetes, PostgreSQL', role: 'student' },
+          { id: 's_cse_3', name: 'Vignesh Kumar', roll: '23CS014', email: 'vignesh.23cs@rpsit.edu', year: '2nd Year', skills: 'Java, Spring Boot, MySQL', role: 'student' }
+        ]
+      },
+      'ECE': {
+        courses: [
+          { id: 'c_ece_1', code: 'EC201', title: 'VLSI Design & Architecture', credits: 4, sem: '5', syllabus: 'CMOS technology, layout design, timing analysis, FPGA synthesis, and Verilog HDL modeling.' },
+          { id: 'c_ece_2', code: 'EC302', title: 'Digital Signal Processing', credits: 4, sem: '4', syllabus: 'Z-transforms, FFT algorithms, digital filter design (FIR/IIR), and DSP processors.' }
+        ],
+        faculty: [
+          { id: 'f_ece_1', name: 'Dr. Sundar Murugan Ph.D.', desig: 'Professor & HOD ECE', email: 'sundar.ece@rpsit.edu', research: 'Embedded Systems & IoT Sensors' }
+        ],
+        events: [
+          { id: 'e_ece_1', title: 'Symposium: MicroChip Summit 2026', date: '2026-12-02', location: 'ECE Core Lab', description: 'Workshop on Verilog synthesis and silicon wafer tape-out methodologies.' }
+        ],
+        students: [
+          { id: 's_ece_1', name: 'Sanjay Krishnan', roll: '22EC042', email: 'sanjay.22ec@rpsit.edu', year: '3rd Year', skills: 'MATLAB, Verilog, Embedded C', role: 'student' }
+        ]
+      },
+      'MECH': {
+        courses: [
+          { id: 'c_mech_1', code: 'ME201', title: 'Applied Thermodynamics', credits: 4, sem: '3', syllabus: 'First and Second law applications, Rankine cycles, IC engines, and gas turbine mechanics.' },
+          { id: 'c_mech_2', code: 'ME302', title: 'Robotics & Automation', credits: 3, sem: '6', syllabus: 'Kinematics, dynamics, robotic manipulators, PLC programming, and computer-integrated manufacturing.' }
+        ],
+        faculty: [
+          { id: 'f_mech_1', name: 'Dr. A. Balamurugan Ph.D.', desig: 'Professor & HOD Mech', email: 'balamurugan.mech@rpsit.edu', research: 'Additive Manufacturing & Composite Materials' }
+        ],
+        events: [
+          { id: 'e_mech_1', title: 'Formula Student Race Car Exhibition', date: '2026-11-20', location: 'Campus Oval Ground', description: 'Unveiling the student-engineered electric formula prototype vehicle.' }
+        ],
+        students: [
+          { id: 's_mech_1', name: 'Rahul Dev', roll: '22ME015', email: 'rahul.22me@rpsit.edu', year: '3rd Year', skills: 'SolidWorks, ANSYS, CNC Programming', role: 'student' }
+        ]
+      },
+      'EEE': {
+        courses: [
+          { id: 'c_eee_1', code: 'EE201', title: 'Power System Operation & Control', credits: 4, sem: '5', syllabus: 'Load flow analysis, fault analysis, power grid stability, and smart grid automation.' }
+        ],
+        faculty: [
+          { id: 'f_eee_1', name: 'Dr. K. Nithya Ph.D.', desig: 'Professor & HOD EEE', email: 'nithya.eee@rpsit.edu', research: 'Renewable Solar Grids & Electric Vehicle Inverters' }
+        ],
+        events: [
+          { id: 'e_eee_1', title: 'Green Energy Conclave 2026', date: '2026-12-10', location: 'Conference Hall B', description: 'Panels on high-efficiency grid battery storage and smart inverters.' }
+        ],
+        students: [
+          { id: 's_eee_1', name: 'Meera Nair', roll: '22EE028', email: 'meera.22ee@rpsit.edu', year: '3rd Year', skills: 'Simulink, Power Electronics, Microcontrollers', role: 'student' }
+        ]
+      },
+      'B.TECH-IT': {
+        courses: [
+          { id: 'c_it_1', code: 'IT301', title: 'Cloud Native Application Development', credits: 4, sem: '5', syllabus: 'Serverless architectures, microservices, GraphQL, CI/CD pipelines, and multi-region deployment.' }
+        ],
+        faculty: [
+          { id: 'f_it_1', name: 'Dr. G. Rajesh Ph.D.', desig: 'Professor & HOD IT', email: 'rajesh.it@rpsit.edu', research: 'Cloud Infrastructure & High-Throughput APIs' }
+        ],
+        events: [
+          { id: 'e_it_1', title: 'DevOps & Cloud Sprint 2026', date: '2026-12-05', location: 'IT Cloud Lab', description: 'Hands-on AWS and Docker deployment workshop for third-year engineers.' }
+        ],
+        students: [
+          { id: 's_it_1', name: 'Deepak V', roll: '23IT009', email: 'deepak.23it@rpsit.edu', year: '2nd Year', skills: 'React, Next.js, Node.js, MongoDB', role: 'student' }
+        ]
+      },
+      'AIDS': {
+        courses: [
+          { id: 'c_aids_1', code: 'AD201', title: 'Deep Learning & Neural Networks', credits: 4, sem: '5', syllabus: 'CNNs, Transformers, Generative AI models, PyTorch, and distributed tensor processing.' }
+        ],
+        faculty: [
+          { id: 'f_aids_1', name: 'Dr. Saravanan K Ph.D.', desig: 'Professor & HOD AI&DS', email: 'saravanan.aids@rpsit.edu', research: 'Large Language Models & Computer Vision' }
+        ],
+        events: [
+          { id: 'e_aids_1', title: 'GenAI Hackfest: Agents of Tomorrow', date: '2026-11-22', location: 'AI Research Center', description: 'Building autonomous agent workflows and RAG systems with modern LLMs.' }
+        ],
+        students: [
+          { id: 's_aids_1', name: 'Sneha Mohan', roll: '23AD031', email: 'sneha.23ad@rpsit.edu', year: '2nd Year', skills: 'Python, PyTorch, LangChain, HuggingFace', role: 'student' }
+        ]
+      },
+      'CIVIL': {
+        courses: [
+          { id: 'c_civ_1', code: 'CE201', title: 'Structural Analysis & Design', credits: 4, sem: '4', syllabus: 'Moment distribution, indeterminate frames, finite element basics, and earthquake engineering.' }
+        ],
+        faculty: [
+          { id: 'f_civ_1', name: 'Dr. M. Sridhar Ph.D.', desig: 'Professor & HOD Civil', email: 'sridhar.civil@rpsit.edu', research: 'Sustainable Concrete & Seismic Isolation' }
+        ],
+        events: [
+          { id: 'e_civ_1', title: 'Smart Infrastructure Expo', date: '2026-12-14', location: 'Civil Drafting Hall', description: 'Exhibition of sustainable geopolymer concrete and BIM building models.' }
+        ],
+        students: [
+          { id: 's_civ_1', name: 'Arun Prakash', roll: '22CE004', email: 'arun.22ce@rpsit.edu', year: '3rd Year', skills: 'AutoCAD, STAAD.Pro, Revit', role: 'student' }
+        ]
+      },
+      'CYBER SECURITY': {
+        courses: [
+          { id: 'c_cs_1', code: 'CY301', title: 'Ethical Hacking & Penetration Testing', credits: 4, sem: '5', syllabus: 'Network exploitation, OWASP Top 10, privilege escalation, reverse engineering, and threat mitigation.' }
+        ],
+        faculty: [
+          { id: 'f_cs_1', name: 'Dr. Tarun Varma Ph.D.', desig: 'Head of Cyber Security', email: 'tarun.cyber@rpsit.edu', research: 'Zero-Trust Networks & Cryptographic Protocols' }
+        ],
+        events: [
+          { id: 'e_cs_1', title: 'RPSIT Capture The Flag (CTF) 2026', date: '2026-11-18', location: 'Cyber Defense Lab', description: 'Inter-collegiate jeopardy-style CTF covering binary exploitation, web security, and cryptography.' }
+        ],
+        students: [
+          { id: 's_cs_1', name: 'Rohan Gupta', roll: '23CY018', email: 'rohan.23cy@rpsit.edu', year: '2nd Year', skills: 'Wireshark, Kali Linux, Python, Burp Suite', role: 'student' }
+        ]
+      }
+    };
+
+    /* App Reactive State */
+    let currentDept = localStorage.getItem('portal_selected_dept') || 'CSE';
+    let currentUser = null; // Session user: { id, name, email, role, ... }
+    let deptUsers = [];
+    let deptCourses = [];
+    let deptFaculty = [];
+    let deptEvents = [];
+
+    /* Helper Utilities */
+    const uid = (prefix = 'id') => prefix + '_' + Math.random().toString(36).slice(2, 9);
+    const getEl = id => document.getElementById(id);
+
+    function escapeHtml(str) {
+      if (str === null || str === undefined) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    /* Toast Notification System */
+    function showToast(message, type = 'info', duration = 3000) {
+      const container = getEl('toastContainer');
+      const item = document.createElement('div');
+      item.className = `toast-item toast-${type}`;
+      
+      const icon = type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️';
+      item.innerHTML = `<span>${icon}</span><span>${escapeHtml(message)}</span>`;
+      
+      container.appendChild(item);
+      setTimeout(() => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateX(100%)';
+        item.style.transition = 'all 0.3s ease';
+        setTimeout(() => item.remove(), 300);
+      }, duration);
+    }
+
+    /* =========================================================
+       THEME MANAGEMENT
+       ========================================================= */
+    function initTheme() {
+      const saved = localStorage.getItem('portal_theme') || 'dark';
+      document.body.setAttribute('data-theme', saved);
+      updateThemeIcon(saved);
+    }
+
+    function toggleTheme() {
+      const current = document.body.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.body.setAttribute('data-theme', next);
+      localStorage.setItem('portal_theme', next);
+      updateThemeIcon(next);
+      showToast(`Switched to ${next} mode`, 'info', 1800);
+    }
+
+    function updateThemeIcon(theme) {
+      getEl('themeToggleBtn').textContent = theme === 'light' ? '☀️' : '🌙';
+    }
+
+    /* =========================================================
+       DEPARTMENT DATA PERSISTENCE & SEEDING
+       ========================================================= */
+    function loadDepartmentData(dept) {
+      currentDept = dept;
+      localStorage.setItem('portal_selected_dept', dept);
+
+      // Keys
+      const keyUsers = `dept_${dept}_users`;
+      const keyCourses = `dept_${dept}_courses`;
+      const keyFaculty = `dept_${dept}_faculty`;
+      const keyEvents = `dept_${dept}_events`;
+
+      // Read from localStorage or auto-seed if empty
+      let storedUsers = localStorage.getItem(keyUsers);
+      let storedCourses = localStorage.getItem(keyCourses);
+      let storedFaculty = localStorage.getItem(keyFaculty);
+      let storedEvents = localStorage.getItem(keyEvents);
+
+      const seed = SEED_DATA[dept] || SEED_DATA['CSE'];
+
+      deptUsers = storedUsers ? JSON.parse(storedUsers) : [...seed.students];
+      deptCourses = storedCourses ? JSON.parse(storedCourses) : [...seed.courses];
+      deptFaculty = storedFaculty ? JSON.parse(storedFaculty) : [...seed.faculty];
+      deptEvents = storedEvents ? JSON.parse(storedEvents) : [...seed.events];
+
+      // If newly seeded, persist immediately
+      if (!storedUsers) localStorage.setItem(keyUsers, JSON.stringify(deptUsers));
+      if (!storedCourses) localStorage.setItem(keyCourses, JSON.stringify(deptCourses));
+      if (!storedFaculty) localStorage.setItem(keyFaculty, JSON.stringify(deptFaculty));
+      if (!storedEvents) localStorage.setItem(keyEvents, JSON.stringify(deptEvents));
+
+      // Check session
+      const sess = localStorage.getItem(`dept_active_session`);
+      if (sess) {
+        try {
+          currentUser = JSON.parse(sess);
+        } catch (e) {
+          currentUser = null;
+        }
+      }
+
+      // Update UI Labels
+      updateDeptUIElements();
+      refreshAllViews();
+    }
+
+    function persistDepartmentData() {
+      localStorage.setItem(`dept_${currentDept}_users`, JSON.stringify(deptUsers));
+      localStorage.setItem(`dept_${currentDept}_courses`, JSON.stringify(deptCourses));
+      localStorage.setItem(`dept_${currentDept}_faculty`, JSON.stringify(deptFaculty));
+      localStorage.setItem(`dept_${currentDept}_events`, JSON.stringify(deptEvents));
+      if (currentUser) {
+        localStorage.setItem(`dept_active_session`, JSON.stringify(currentUser));
+      } else {
+        localStorage.removeItem(`dept_active_session`);
+      }
+    }
+
+    function switchDepartment(dept) {
+      if (!DEPARTMENTS.includes(dept)) return;
+      persistDepartmentData();
+      loadDepartmentData(dept);
+      showToast(`Switched to ${dept} Department`, 'success', 2200);
+    }
+
+    function onHeaderDeptChange() {
+      const val = getEl('headerDepartment').value;
+      switchDepartment(val);
+    }
+
+    function updateDeptUIElements() {
+      getEl('headerDepartment').value = currentDept;
+      getEl('drawerDeptSelect').value = currentDept;
+      
+      const fullName = DEPT_NAMES[currentDept] || currentDept;
+      getEl('heroDeptBadge').textContent = `Department of ${currentDept}`;
+      getEl('heroDeptHighlight').textContent = currentDept;
+      getEl('cardDeptName').textContent = `${currentDept} Department`;
+
+      document.querySelectorAll('.currentDeptTitle').forEach(el => {
+        el.textContent = currentDept;
+      });
+
+      // Update KPIs in Hero Card
+      getEl('kpiHeroStudents').textContent = deptUsers.filter(u => u.role === 'student').length;
+      getEl('kpiHeroCourses').textContent = deptCourses.length;
+      getEl('kpiHeroFaculty').textContent = deptFaculty.length;
+      getEl('kpiHeroEvents').textContent = deptEvents.length;
+
+      // Update KPI in Dashboard
+      getEl('dashTotalStudents').textContent = deptUsers.filter(u => u.role === 'student').length;
+      getEl('dashTotalCourses').textContent = deptCourses.length;
+      getEl('dashTotalFaculty').textContent = deptFaculty.length;
+      getEl('dashTotalEvents').textContent = deptEvents.length;
+    }
+
+    /* =========================================================
+       NAVIGATION ROUTING
+       ========================================================= */
+    function navTo(sectionName) {
+      // Access control
+      if (sectionName === 'profile' && (!currentUser || currentUser.role !== 'student')) {
+        showToast('Profile view is reserved for authenticated students', 'error');
+        return;
+      }
+
+      // Hide all sections
+      document.querySelectorAll('.portal-section').forEach(sec => {
+        sec.classList.remove('active');
+      });
+
+      // Remove active states from nav buttons
+      document.querySelectorAll('.nav-item-btn').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.bottom-nav-item').forEach(btn => btn.classList.remove('active'));
+
+      // Show target section
+      const targetSec = getEl(`sec-${sectionName}`);
+      if (targetSec) {
+        targetSec.classList.add('active');
+      }
+
+      // Set active nav button
+      const navBtn = getEl(`nav-btn-${sectionName}`);
+      if (navBtn) navBtn.classList.add('active');
+
+      const bnavBtn = getEl(`bnav-${sectionName}`);
+      if (bnavBtn) bnavBtn.classList.add('active');
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger view-specific re-renders
+      if (sectionName === 'students') renderStudentsTable();
+      if (sectionName === 'courses') renderCoursesGrid();
+      if (sectionName === 'faculty') renderFacultyGrid();
+      if (sectionName === 'events') renderEventsGrid();
+      if (sectionName === 'dashboard') renderDashboardView();
+      if (sectionName === 'profile') renderProfileView();
+    }
+
+    function toggleMobileDrawer() {
+      getEl('mobileDrawer').classList.toggle('open');
+      getEl('drawerBackdrop').classList.toggle('open');
+    }
+
+    function closeMobileDrawer() {
+      getEl('mobileDrawer').classList.remove('open');
+      getEl('drawerBackdrop').classList.remove('open');
+    }
+
+    /* =========================================================
+       AUTHENTICATION & ROLE GUARDS
+       ========================================================= */
+    function checkPermission(action) {
+      if (!currentUser) return false;
+      const role = currentUser.role;
+      if (role === 'admin') return true;
+      if (role === 'staff') {
+        return ['students-add', 'students-edit', 'courses-view', 'faculty-view', 'events-view', 'dashboard-view'].includes(action);
+      }
+      if (role === 'student') {
+        return ['profile-edit', 'courses-view', 'faculty-view', 'events-view'].includes(action);
+      }
+      return false;
+    }
+
+    function updateAuthUI() {
+      const userProfileTag = getEl('userProfileTag');
+      const userRoleBadge = getEl('userRoleBadge');
+      const userDisplayName = getEl('userDisplayName');
+      const btnLogin = getEl('btnLogin');
+      const btnRegister = getEl('btnRegister');
+      const btnLogout = getEl('btnLogout');
+      const navProfile = getEl('nav-btn-profile');
+      const drawerProfileBtn = getEl('drawerProfileBtn');
+      const drawerUserInfo = getEl('drawerUserInfo');
+
+      if (currentUser) {
+        userProfileTag.style.display = 'inline-flex';
+        userRoleBadge.textContent = currentUser.role.toUpperCase();
+        userRoleBadge.className = `role-badge role-${currentUser.role}`;
+        userDisplayName.textContent = currentUser.name || 'User';
+
+        btnLogin.style.display = 'none';
+        btnRegister.style.display = 'none';
+        btnLogout.style.display = 'inline-flex';
+
+        // Drawer
+        drawerUserInfo.style.display = 'block';
+        getEl('drawerUserRole').textContent = currentUser.role.toUpperCase();
+        getEl('drawerUserRole').className = `role-badge role-${currentUser.role}`;
+        getEl('drawerUserName').textContent = currentUser.name;
+        getEl('drawerUserEmail').textContent = currentUser.email || '';
+
+        // Student profile link
+        if (currentUser.role === 'student') {
+          navProfile.style.display = 'inline-flex';
+          drawerProfileBtn.style.display = 'inline-flex';
+        } else {
+          navProfile.style.display = 'none';
+          drawerProfileBtn.style.display = 'none';
+        }
+      } else {
+        userProfileTag.style.display = 'none';
+        btnLogin.style.display = 'inline-flex';
+        btnRegister.style.display = 'inline-flex';
+        btnLogout.style.display = 'none';
+        navProfile.style.display = 'none';
+        drawerProfileBtn.style.display = 'none';
+        drawerUserInfo.style.display = 'none';
+      }
+
+      // Hide or show Add buttons based on permissions
+      const canAddStudent = checkPermission('students-add');
+      const canManageAdmin = currentUser?.role === 'admin';
+
+      getEl('btnAddStudentBtn').style.display = canAddStudent ? 'inline-flex' : 'none';
+      getEl('btnAddCourseBtn').style.display = canManageAdmin ? 'inline-flex' : 'none';
+      getEl('btnAddFacultyBtn').style.display = canManageAdmin ? 'inline-flex' : 'none';
+      getEl('btnAddEventBtn').style.display = canManageAdmin ? 'inline-flex' : 'none';
+    }
+
+    function demoLogin(role) {
+      if (role === 'admin') {
+        currentUser = {
+          id: 'admin_demo',
+          name: 'Chief Administrator',
+          email: 'admin.dept@rpsit.edu',
+          role: 'admin'
+        };
+      } else if (role === 'staff') {
+        currentUser = {
+          id: 'staff_demo',
+          name: 'Prof. K. Anand M.Tech.',
+          email: 'anand.cse@rpsit.edu',
+          role: 'staff',
+          staffId: 'STAFF001'
+        };
+      } else if (role === 'student') {
+        const firstStudent = deptUsers.find(u => u.role === 'student') || {
+          id: 's_demo',
+          name: 'Karthik Raja',
+          roll: '22CS101',
+          email: 'karthik.22cs@rpsit.edu',
+          year: '3rd Year',
+          skills: 'Python, TypeScript, React',
+          role: 'student'
+        };
+        currentUser = { ...firstStudent };
+      }
+
+      persistDepartmentData();
+      updateAuthUI();
+      showToast(`Logged in as ${currentUser.name} (${role.toUpperCase()})`, 'success');
+      
+      if (role === 'student') {
+        navTo('profile');
+      } else {
+        navTo('dashboard');
+      }
+    }
+
+    function performLogout() {
+      currentUser = null;
+      localStorage.removeItem('dept_active_session');
+      updateAuthUI();
+      showToast('Logged out successfully', 'info');
+      navTo('home');
+    }
+
+    /* Modal Helpers */
+    function openModal(id) {
+      const modal = getEl(id);
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeModal(id) {
+      const modal = getEl(id);
+      if (modal) modal.classList.remove('open');
+    }
+
+    function openLoginModal() { openModal('modalLogin'); }
+    function openRegisterModal() { openModal('modalRegister'); }
+    function openChangePasswordModal() { openModal('modalPassword'); }
+
+    function onLoginRoleChange() {
+      const role = getEl('loginTypeSelect').value;
+      getEl('loginFieldAdmin').style.display = role === 'admin' ? 'block' : 'none';
+      getEl('loginFieldStaff').style.display = role === 'staff' ? 'block' : 'none';
+      getEl('loginFieldStudent').style.display = role === 'student' ? 'block' : 'none';
+    }
+
+    function handleFormLogin(e) {
+      e.preventDefault();
+      const role = getEl('loginTypeSelect').value;
+
+      if (role === 'admin') {
+        const u = getEl('adminUsernameInput').value.trim();
+        const p = getEl('adminPasswordInput').value.trim();
+        if (u === 'admin' && p === 'admin123') {
+          currentUser = { id: 'admin_sys', name: 'System Administrator', email: 'admin@rpsit.edu', role: 'admin' };
+        } else {
+          showToast('Invalid admin credentials. Use admin / admin123', 'error');
+          return;
+        }
+      } else if (role === 'staff') {
+        const id = getEl('staffIdInput').value.trim();
+        const p = getEl('staffPasswordInput').value.trim();
+        if ((id === 'STAFF001' && p === 'staff123') || id.length > 2) {
+          currentUser = { id: 'staff_' + id, name: 'Faculty Member (' + id + ')', email: id.toLowerCase() + '@rpsit.edu', role: 'staff', staffId: id };
+        } else {
+          showToast('Invalid staff ID or password', 'error');
+          return;
+        }
+      } else if (role === 'student') {
+        const email = getEl('studentEmailInput').value.trim().toLowerCase();
+        const roll = getEl('studentRollInput').value.trim().toLowerCase();
+        const found = deptUsers.find(u => u.role === 'student' && (u.email?.toLowerCase() === email || u.roll?.toLowerCase() === roll));
+        if (found) {
+          currentUser = { ...found };
+        } else {
+          showToast('Student not found in this department. Register first.', 'error');
+          return;
+        }
+      }
+
+      persistDepartmentData();
+      updateAuthUI();
+      closeModal('modalLogin');
+      showToast(`Welcome back, ${currentUser.name}!`, 'success');
+      navTo('dashboard');
+    }
+
+    function onRegisterRoleChange() {
+      const role = getEl('regRoleSelect').value;
+      getEl('regStudentFields').style.display = role === 'student' ? 'block' : 'none';
+      getEl('regStaffFields').style.display = role === 'staff' ? 'block' : 'none';
+      getEl('regAdminFields').style.display = role === 'admin' ? 'block' : 'none';
+    }
+
+    function handleFormRegister(e) {
+      e.preventDefault();
+      const role = getEl('regRoleSelect').value;
+      const name = getEl('regFullName').value.trim();
+      const email = getEl('regEmail').value.trim();
+
+      if (!name || !email) {
+        showToast('Please enter name and email', 'error');
+        return;
+      }
+
+      // Check duplicates
+      const dup = deptUsers.find(u => u.email?.toLowerCase() === email.toLowerCase());
+      if (dup) {
+        showToast('An account with this email already exists', 'error');
+        return;
+      }
+
+      const newUser = {
+        id: uid('usr'),
+        name,
+        email,
+        role,
+        registeredAt: new Date().toISOString()
+      };
+
+      if (role === 'student') {
+        newUser.roll = getEl('regRoll').value.trim() || '23' + currentDept.slice(0, 2) + Math.floor(100 + Math.random() * 900);
+        newUser.year = getEl('regYear').value;
+        newUser.skills = getEl('regSkills').value.trim() || 'General Engineering';
+      } else if (role === 'staff') {
+        newUser.staffId = getEl('regStaffId').value.trim() || 'STF_' + Math.floor(100 + Math.random() * 900);
+      }
+
+      deptUsers.unshift(newUser);
+      persistDepartmentData();
+      closeModal('modalRegister');
+      showToast('Registration successful! You may now sign in.', 'success');
+      updateDeptUIElements();
+      refreshAllViews();
+    }
+
+    function handleSavePassword(e) {
+      e.preventDefault();
+      const curr = getEl('pwdCurrent').value.trim();
+      const next = getEl('pwdNew').value.trim();
+      const conf = getEl('pwdConfirm').value.trim();
+
+      if (next !== conf) {
+        showToast('New passwords do not match', 'error');
+        return;
+      }
+      if (next.length < 4) {
+        showToast('Password must be at least 4 characters', 'error');
+        return;
+      }
+
+      showToast('Password updated successfully for current session', 'success');
+      closeModal('modalPassword');
+    }
+
+    /* =========================================================
+       STUDENTS DIRECTORY MANAGEMENT
+       ========================================================= */
+    function renderStudentsTable() {
+      const tbody = getEl('studentsTableBody');
+      const emptyState = getEl('studentsEmptyState');
+      const filter = (getEl('studentSearchFilter').value || '').trim().toLowerCase();
+
+      let list = deptUsers.filter(u => u.role === 'student');
+
+      if (filter) {
+        list = list.filter(s =>
+          (s.name || '').toLowerCase().includes(filter) ||
+          (s.roll || '').toLowerCase().includes(filter) ||
+          (s.email || '').toLowerCase().includes(filter) ||
+          (s.skills || '').toLowerCase().includes(filter)
+        );
+      }
+
+      if (list.length === 0) {
+        tbody.innerHTML = '';
+        getEl('studentsTable').style.display = 'none';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      getEl('studentsTable').style.display = 'table';
+      emptyState.style.display = 'none';
+      tbody.innerHTML = '';
+
+      const canEdit = checkPermission('students-edit');
+      const isAdmin = currentUser?.role === 'admin';
+
+      list.forEach((s, idx) => {
+        const tr = document.createElement('tr');
+        
+        const skillsHtml = (s.skills || 'Engineering')
+          .split(',')
+          .map(sk => `<span class="skill-pill">${escapeHtml(sk.trim())}</span>`)
+          .join('');
+
+        tr.innerHTML = `
+          <td style="font-family:var(--font-mono);font-size:0.8rem">${idx + 1}</td>
+          <td><strong>${escapeHtml(s.name)}</strong></td>
+          <td><span style="font-family:var(--font-mono);font-weight:700;color:var(--primary)">${escapeHtml(s.roll || '—')}</span></td>
+          <td><span class="skill-pill">${escapeHtml(s.year || '1st Year')}</span></td>
+          <td style="color:var(--text-muted);font-size:0.8125rem">${escapeHtml(s.email || '—')}</td>
+          <td><div class="skills-pill-wrap">${skillsHtml}</div></td>
+          <td><span class="role-badge role-student">STUDENT</span></td>
+          <td style="text-align:right">
+            <div style="display:inline-flex;gap:0.35rem">
+              ${canEdit ? `<button class="btn btn-ghost btn-sm" onclick="editStudent('${s.id}')">Edit</button>` : ''}
+              ${isAdmin ? `<button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="deleteStudent('${s.id}')">Delete</button>` : ''}
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function openAddStudentModal() {
+      if (!checkPermission('students-add')) {
+        showToast('Permission denied. Staff or Admin role required.', 'error');
+        return;
+      }
+      getEl('studentModalTitle').textContent = 'Add Student Record';
+      getEl('studentEditId').value = '';
+      getEl('studentFormName').value = '';
+      getEl('studentFormRoll').value = '';
+      getEl('studentFormEmail').value = '';
+      getEl('studentFormYear').value = '1st Year';
+      getEl('studentFormSkills').value = '';
+      openModal('modalStudent');
+    }
+
+    function editStudent(id) {
+      const s = deptUsers.find(x => x.id === id);
+      if (!s) return;
+      getEl('studentModalTitle').textContent = 'Edit Student Record';
+      getEl('studentEditId').value = s.id;
+      getEl('studentFormName').value = s.name || '';
+      getEl('studentFormRoll').value = s.roll || '';
+      getEl('studentFormEmail').value = s.email || '';
+      getEl('studentFormYear').value = s.year || '1st Year';
+      getEl('studentFormSkills').value = s.skills || '';
+      openModal('modalStudent');
+    }
+
+    function handleSaveStudent(e) {
+      e.preventDefault();
+      const id = getEl('studentEditId').value;
+      const name = getEl('studentFormName').value.trim();
+      const roll = getEl('studentFormRoll').value.trim();
+      const email = getEl('studentFormEmail').value.trim();
+      const year = getEl('studentFormYear').value;
+      const skills = getEl('studentFormSkills').value.trim();
+
+      if (id) {
+        const idx = deptUsers.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          deptUsers[idx] = { ...deptUsers[idx], name, roll, email, year, skills };
+          showToast('Student record updated', 'success');
+        }
+      } else {
+        const newStudent = {
+          id: uid('s'),
+          name,
+          roll,
+          email,
+          year,
+          skills,
+          role: 'student',
+          registeredAt: new Date().toISOString()
+        };
+        deptUsers.unshift(newStudent);
+        showToast('New student registered', 'success');
+      }
+
+      persistDepartmentData();
+      closeModal('modalStudent');
+      updateDeptUIElements();
+      renderStudentsTable();
+    }
+
+    function deleteStudent(id) {
+      if (!confirm('Are you sure you want to remove this student record?')) return;
+      deptUsers = deptUsers.filter(x => x.id !== id);
+      persistDepartmentData();
+      updateDeptUIElements();
+      renderStudentsTable();
+      showToast('Student record removed', 'info');
+    }
+
+    function exportStudentsData() {
+      const students = deptUsers.filter(u => u.role === 'student');
+      const json = JSON.stringify(students, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `RPSIT_${currentDept}_Students.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      showToast('Student data exported successfully', 'success');
+    }
+
+    function triggerImportStudents() {
+      getEl('importFileInput').click();
+    }
+
+    function handleFileImport(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = ev => {
+        try {
+          const list = JSON.parse(ev.target.result);
+          if (!Array.isArray(list)) throw new Error('Root JSON must be an array of students');
+          
+          let count = 0;
+          list.forEach(item => {
+            if (item.name && !deptUsers.some(u => u.email === item.email)) {
+              deptUsers.push({
+                id: item.id || uid('s'),
+                name: item.name,
+                roll: item.roll || '23' + currentDept.slice(0, 2) + Math.floor(100 + Math.random() * 900),
+                email: item.email || `imported_${count}@rpsit.edu`,
+                year: item.year || '1st Year',
+                skills: item.skills || 'Engineering',
+                role: 'student',
+                registeredAt: new Date().toISOString()
+              });
+              count++;
+            }
+          });
+
+          persistDepartmentData();
+          updateDeptUIElements();
+          renderStudentsTable();
+          showToast(`Successfully imported ${count} student records`, 'success');
+        } catch (err) {
+          showToast(`Import failed: ${err.message}`, 'error');
+        }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    /* =========================================================
+       COURSES CURRICULUM MANAGEMENT
+       ========================================================= */
+    function renderCoursesGrid() {
+      const container = getEl('coursesGridContainer');
+      const semFilter = getEl('courseSemesterFilter').value;
+      const isAdmin = currentUser?.role === 'admin';
+
+      let list = deptCourses;
+      if (semFilter !== 'ALL') {
+        list = list.filter(c => String(c.sem) === String(semFilter));
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1">
+            <div class="empty-state-icon">📚</div>
+            <h3>No courses found</h3>
+            <p>Select another semester or click '+ Add Course' to expand the curriculum.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      list.forEach(c => {
+        const card = document.createElement('div');
+        card.className = 'entity-card';
+        card.innerHTML = `
+          <div>
+            <div class="card-header-badge">
+              <span class="course-code">${escapeHtml(c.code)}</span>
+              <span class="skill-pill">Semester ${escapeHtml(c.sem)}</span>
+            </div>
+            <h3 class="card-title">${escapeHtml(c.title)}</h3>
+            <p class="card-desc">${escapeHtml(c.syllabus || 'Accredited syllabus modules under Anna University engineering regulation.')}</p>
+          </div>
+          <div class="card-meta-row">
+            <span><strong>Credits:</strong> ${c.credits || 3}</span>
+            ${isAdmin ? `
+              <div style="display:flex;gap:0.35rem">
+                <button class="btn btn-ghost btn-sm" onclick="editCourse('${c.id}')">Edit</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="deleteCourse('${c.id}')">Delete</button>
+              </div>
+            ` : `<button class="btn btn-ghost btn-sm" onclick="showToast('Syllabus downloaded', 'success')">Download PDF</button>`}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddCourseModal() {
+      getEl('courseModalTitle').textContent = 'Add Course Module';
+      getEl('courseEditId').value = '';
+      getEl('courseFormCode').value = '';
+      getEl('courseFormTitle').value = '';
+      getEl('courseFormSem').value = '1';
+      getEl('courseFormCredits').value = '3';
+      getEl('courseFormSyllabus').value = '';
+      openModal('modalCourse');
+    }
+
+    function editCourse(id) {
+      const c = deptCourses.find(x => x.id === id);
+      if (!c) return;
+      getEl('courseModalTitle').textContent = 'Edit Course Module';
+      getEl('courseEditId').value = c.id;
+      getEl('courseFormCode').value = c.code;
+      getEl('courseFormTitle').value = c.title;
+      getEl('courseFormSem').value = c.sem;
+      getEl('courseFormCredits').value = c.credits;
+      getEl('courseFormSyllabus').value = c.syllabus || '';
+      openModal('modalCourse');
+    }
+
+    function handleSaveCourse(e) {
+      e.preventDefault();
+      const id = getEl('courseEditId').value;
+      const code = getEl('courseFormCode').value.trim();
+      const title = getEl('courseFormTitle').value.trim();
+      const sem = getEl('courseFormSem').value;
+      const credits = parseInt(getEl('courseFormCredits').value) || 3;
+      const syllabus = getEl('courseFormSyllabus').value.trim();
+
+      if (id) {
+        const idx = deptCourses.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          deptCourses[idx] = { ...deptCourses[idx], code, title, sem, credits, syllabus };
+          showToast('Course module updated', 'success');
+        }
+      } else {
+        deptCourses.push({ id: uid('c'), code, title, sem, credits, syllabus });
+        showToast('New course added to curriculum', 'success');
+      }
+
+      persistDepartmentData();
+      closeModal('modalCourse');
+      updateDeptUIElements();
+      renderCoursesGrid();
+    }
+
+    function deleteCourse(id) {
+      if (!confirm('Delete this course module?')) return;
+      deptCourses = deptCourses.filter(x => x.id !== id);
+      persistDepartmentData();
+      updateDeptUIElements();
+      renderCoursesGrid();
+      showToast('Course module deleted', 'info');
+    }
+
+    /* =========================================================
+       FACULTY DIRECTORY MANAGEMENT
+       ========================================================= */
+    function renderFacultyGrid() {
+      const container = getEl('facultyGridContainer');
+      const isAdmin = currentUser?.role === 'admin';
+
+      if (deptFaculty.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1">
+            <div class="empty-state-icon">👨‍🏫</div>
+            <h3>No faculty members listed</h3>
+            <p>Click '+ Add Faculty' to register departmental professors.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      deptFaculty.forEach(f => {
+        const card = document.createElement('div');
+        card.className = 'entity-card';
+        const initials = f.name.split(' ').map(n => n[0]).filter(Boolean).slice(0, 2).join('') || 'DR';
+
+        card.innerHTML = `
+          <div>
+            <div class="faculty-header">
+              <div class="faculty-avatar">${initials}</div>
+              <div>
+                <h3 style="font-size:1.1rem;font-weight:700">${escapeHtml(f.name)}</h3>
+                <div style="font-size:0.8125rem;color:var(--primary);font-weight:600">${escapeHtml(f.desig)}</div>
+              </div>
+            </div>
+            <div style="font-size:0.8125rem;color:var(--text-muted);margin-bottom:0.75rem">
+              <strong>Email:</strong> ${escapeHtml(f.email || '—')}
+            </div>
+            <div style="font-size:0.8125rem;color:var(--text-dim)">
+              <strong>Research Focus:</strong> ${escapeHtml(f.research || 'Core Engineering')}
+            </div>
+          </div>
+          <div class="card-meta-row" style="margin-top:1rem">
+            <span class="role-badge role-staff">FACULTY</span>
+            ${isAdmin ? `
+              <div style="display:flex;gap:0.35rem">
+                <button class="btn btn-ghost btn-sm" onclick="editFaculty('${f.id}')">Edit</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="deleteFaculty('${f.id}')">Delete</button>
+              </div>
+            ` : `<a class="btn btn-ghost btn-sm" href="mailto:${f.email}">Contact</a>`}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddFacultyModal() {
+      getEl('facultyModalTitle').textContent = 'Add Faculty Member';
+      getEl('facultyEditId').value = '';
+      getEl('facFormName').value = '';
+      getEl('facFormDesig').value = '';
+      getEl('facFormEmail').value = '';
+      getEl('facFormResearch').value = '';
+      openModal('modalFaculty');
+    }
+
+    function editFaculty(id) {
+      const f = deptFaculty.find(x => x.id === id);
+      if (!f) return;
+      getEl('facultyModalTitle').textContent = 'Edit Faculty Member';
+      getEl('facultyEditId').value = f.id;
+      getEl('facFormName').value = f.name;
+      getEl('facFormDesig').value = f.desig;
+      getEl('facFormEmail').value = f.email;
+      getEl('facFormResearch').value = f.research || '';
+      openModal('modalFaculty');
+    }
+
+    function handleSaveFaculty(e) {
+      e.preventDefault();
+      const id = getEl('facultyEditId').value;
+      const name = getEl('facFormName').value.trim();
+      const desig = getEl('facFormDesig').value.trim();
+      const email = getEl('facFormEmail').value.trim();
+      const research = getEl('facFormResearch').value.trim();
+
+      if (id) {
+        const idx = deptFaculty.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          deptFaculty[idx] = { ...deptFaculty[idx], name, desig, email, research };
+          showToast('Faculty details updated', 'success');
+        }
+      } else {
+        deptFaculty.push({ id: uid('f'), name, desig, email, research });
+        showToast('New faculty member added', 'success');
+      }
+
+      persistDepartmentData();
+      closeModal('modalFaculty');
+      updateDeptUIElements();
+      renderFacultyGrid();
+    }
+
+    function deleteFaculty(id) {
+      if (!confirm('Remove this faculty member?')) return;
+      deptFaculty = deptFaculty.filter(x => x.id !== id);
+      persistDepartmentData();
+      updateDeptUIElements();
+      renderFacultyGrid();
+      showToast('Faculty member removed', 'info');
+    }
+
+    /* =========================================================
+       EVENTS & SEMINARS MANAGEMENT
+       ========================================================= */
+    function renderEventsGrid() {
+      const container = getEl('eventsGridContainer');
+      const isAdmin = currentUser?.role === 'admin';
+
+      if (deptEvents.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state" style="grid-column: 1 / -1">
+            <div class="empty-state-icon">📅</div>
+            <h3>No events scheduled</h3>
+            <p>Stay tuned for technical symposiums, workshops, and guest seminars.</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+      const sorted = [...deptEvents].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+      sorted.forEach(ev => {
+        const card = document.createElement('div');
+        card.className = 'entity-card';
+        
+        let dateDisplay = ev.date;
+        try {
+          const d = new Date(ev.date);
+          dateDisplay = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        } catch (e) {}
+
+        card.innerHTML = `
+          <div>
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.75rem;margin-bottom:0.85rem">
+              <div>
+                <span class="skill-pill" style="margin-bottom:0.35rem;display:inline-block">📍 ${escapeHtml(ev.location || 'Campus Auditorium')}</span>
+                <h3 class="card-title">${escapeHtml(ev.title)}</h3>
+              </div>
+              <div class="event-date-box">
+                <span style="font-size:0.65rem;text-transform:uppercase">DATE</span>
+                <span style="font-size:0.85rem">${escapeHtml(dateDisplay)}</span>
+              </div>
+            </div>
+            <p class="card-desc">${escapeHtml(ev.description || 'Inter-collegiate departmental symposium with active participation from academia and industry.')}</p>
+          </div>
+          <div class="card-meta-row">
+            <button class="btn btn-primary btn-sm" onclick="showToast('Registered for ' + '${escapeHtml(ev.title)}', 'success')">RSVP / Register</button>
+            ${isAdmin ? `
+              <div style="display:flex;gap:0.35rem">
+                <button class="btn btn-ghost btn-sm" onclick="editEvent('${ev.id}')">Edit</button>
+                <button class="btn btn-ghost btn-sm" style="color:var(--danger)" onclick="deleteEvent('${ev.id}')">Delete</button>
+              </div>
+            ` : ''}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function openAddEventModal() {
+      getEl('eventModalTitle').textContent = 'Schedule Department Event';
+      getEl('eventEditId').value = '';
+      getEl('eventFormTitle').value = '';
+      getEl('eventFormDate').value = new Date().toISOString().split('T')[0];
+      getEl('eventFormLoc').value = 'Auditorium Hall';
+      getEl('eventFormDesc').value = '';
+      openModal('modalEvent');
+    }
+
+    function editEvent(id) {
+      const e = deptEvents.find(x => x.id === id);
+      if (!e) return;
+      getEl('eventModalTitle').textContent = 'Edit Department Event';
+      getEl('eventEditId').value = e.id;
+      getEl('eventFormTitle').value = e.title;
+      getEl('eventFormDate').value = e.date;
+      getEl('eventFormLoc').value = e.location || '';
+      getEl('eventFormDesc').value = e.description || '';
+      openModal('modalEvent');
+    }
+
+    function handleSaveEvent(e) {
+      e.preventDefault();
+      const id = getEl('eventEditId').value;
+      const title = getEl('eventFormTitle').value.trim();
+      const date = getEl('eventFormDate').value;
+      const location = getEl('eventFormLoc').value.trim();
+      const description = getEl('eventFormDesc').value.trim();
+
+      if (id) {
+        const idx = deptEvents.findIndex(x => x.id === id);
+        if (idx !== -1) {
+          deptEvents[idx] = { ...deptEvents[idx], title, date, location, description };
+          showToast('Event updated successfully', 'success');
+        }
+      } else {
+        deptEvents.push({ id: uid('ev'), title, date, location, description });
+        showToast('New event scheduled', 'success');
+      }
+
+      persistDepartmentData();
+      closeModal('modalEvent');
+      updateDeptUIElements();
+      renderEventsGrid();
+    }
+
+    function deleteEvent(id) {
+      if (!confirm('Remove this event?')) return;
+      deptEvents = deptEvents.filter(x => x.id !== id);
+      persistDepartmentData();
+      updateDeptUIElements();
+      renderEventsGrid();
+      showToast('Event deleted', 'info');
+    }
+
+    /* =========================================================
+       ANALYTICS DASHBOARD & KPI INSIGHTS
+       ========================================================= */
+    function renderDashboardView() {
+      // Recent activity
+      const activityContainer = getEl('recentActivityList');
+      const students = deptUsers.filter(u => u.role === 'student');
+      
+      activityContainer.innerHTML = '';
+      if (students.length === 0) {
+        activityContainer.innerHTML = '<div style="color:var(--text-muted)">No student activity recorded yet.</div>';
+      } else {
+        students.slice(0, 5).forEach(s => {
+          const item = document.createElement('div');
+          item.style.display = 'flex';
+          item.style.justifyContent = 'space-between';
+          item.style.alignItems = 'center';
+          item.style.padding = '0.5rem 0';
+          item.style.borderBottom = '1px solid var(--border-subtle)';
+          item.innerHTML = `
+            <div>
+              <strong>${escapeHtml(s.name)}</strong>
+              <div style="font-size:0.75rem;color:var(--text-muted)">${escapeHtml(s.roll || '—')} • ${escapeHtml(s.year || '1st Year')}</div>
+            </div>
+            <span class="role-badge role-student">Active</span>
+          `;
+          activityContainer.appendChild(item);
+        });
+      }
+
+      // Year distribution
+      const distContainer = getEl('yearWiseDistribution');
+      distContainer.innerHTML = '';
+      const years = ['1st Year', '2nd Year', '3rd Year', '4th Year'];
+      
+      years.forEach(yr => {
+        const count = students.filter(s => s.year === yr).length;
+        const pct = students.length > 0 ? Math.round((count / students.length) * 100) : 0;
+        
+        const row = document.createElement('div');
+        row.innerHTML = `
+          <div style="display:flex;justify-content:space-between;margin-bottom:0.25rem">
+            <span>${yr}</span>
+            <span style="font-weight:700">${count} students (${pct}%)</span>
+          </div>
+          <div style="width:100%;height:8px;background:var(--bg-card);border-radius:4px;overflow:hidden">
+            <div style="width:${pct}%;height:100%;background:linear-gradient(90deg,var(--primary),var(--accent));border-radius:4px"></div>
+          </div>
+        `;
+        distContainer.appendChild(row);
+      });
+    }
+
+    /* =========================================================
+       STUDENT PROFILE VIEW
+       ========================================================= */
+    function renderProfileView() {
+      if (!currentUser || currentUser.role !== 'student') return;
+      getEl('profileName').textContent = currentUser.name;
+      getEl('profileAvatarLetter').textContent = currentUser.name.charAt(0).toUpperCase();
+      getEl('profileDeptSub').textContent = `${currentDept} Department • Enrolled`;
+      getEl('profileRoll').textContent = currentUser.roll || '—';
+      getEl('profileYear').textContent = currentUser.year || '1st Year';
+      getEl('profileEmail').textContent = currentUser.email || '—';
+      getEl('profileSkills').textContent = currentUser.skills || 'General Engineering';
+    }
+
+    function editCurrentProfile() {
+      if (!currentUser) return;
+      editStudent(currentUser.id);
+    }
+
+    /* =========================================================
+       GLOBAL LIVE SEARCH
+       ========================================================= */
+    let searchDebounceTimer = null;
+    function onGlobalSearch(val) {
+      clearTimeout(searchDebounceTimer);
+      searchDebounceTimer = setTimeout(() => {
+        const query = val.trim().toLowerCase();
+        if (!query) return;
+
+        // Search students
+        const matchStudent = deptUsers.find(s =>
+          (s.name || '').toLowerCase().includes(query) ||
+          (s.roll || '').toLowerCase().includes(query) ||
+          (s.skills || '').toLowerCase().includes(query)
+        );
+
+        if (matchStudent) {
+          getEl('studentSearchFilter').value = query;
+          navTo('students');
+          showToast(`Found student: ${matchStudent.name}`, 'success');
+          return;
+        }
+
+        // Search courses
+        const matchCourse = deptCourses.find(c =>
+          (c.code || '').toLowerCase().includes(query) ||
+          (c.title || '').toLowerCase().includes(query)
+        );
+
+        if (matchCourse) {
+          navTo('courses');
+          showToast(`Found course: ${matchCourse.code} - ${matchCourse.title}`, 'info');
+          return;
+        }
+
+        // Search faculty
+        const matchFaculty = deptFaculty.find(f =>
+          (f.name || '').toLowerCase().includes(query) ||
+          (f.research || '').toLowerCase().includes(query)
+        );
+
+        if (matchFaculty) {
+          navTo('faculty');
+          showToast(`Found faculty member: ${matchFaculty.name}`, 'info');
+          return;
+        }
+
+        showToast('No matching records found in ' + currentDept, 'info');
+      }, 300);
+    }
+
+    function refreshAllViews() {
+      renderStudentsTable();
+      renderCoursesGrid();
+      renderFacultyGrid();
+      renderEventsGrid();
+      renderDashboardView();
+      updateAuthUI();
+    }
+
+    /* =========================================================
+       INITIALIZATION
+       ========================================================= */
+    function initPortal() {
+      initTheme();
+      loadDepartmentData(currentDept);
+      navTo('home');
+    }
+
+    // Run on DOM Ready
+    window.addEventListener('DOMContentLoaded', initPortal);
+  </script>
+</body>
+</html>
